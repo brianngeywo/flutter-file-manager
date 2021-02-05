@@ -1,12 +1,45 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class Mainscreen extends StatelessWidget {
+class Mainscreen extends StatefulWidget {
   static const String idScreen = "mainscreen";
+
+  @override
+  _MainscreenState createState() => _MainscreenState();
+}
+
+class _MainscreenState extends State<Mainscreen> {
+  int _page = 0;
+  GlobalKey _bottomNavigationKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorLight,
+      bottomNavigationBar: CurvedNavigationBar(
+          key: _bottomNavigationKey,
+          index: 0,
+          height: 50.0,
+          items: <Widget>[
+            Icon(Entypo.folder, size: 30),
+            Icon(Entypo.images, size: 30),
+            Icon(Entypo.video, size: 30),
+            Icon(Entypo.music, size: 30),
+            Icon(FontAwesome.file_pdf_o, size: 30),
+          ],
+          color: Colors.white,
+          buttonBackgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          animationCurve: Curves.easeInOut,
+          animationDuration: Duration(milliseconds: 600),
+          onTap: (index) {
+            setState(() {
+              _page = index;
+            });
+          },
+          letIndexChange: (index) => true,
+        ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
